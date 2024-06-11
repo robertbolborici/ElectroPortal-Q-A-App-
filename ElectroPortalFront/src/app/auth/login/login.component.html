@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="login-container">
+    <img src="../../../assets/background6.png" alt="Background" class="background-image">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username">
+      </div>
+      <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password">
+      </div>
+      <div class="register-redirect">
+        Don't have an account? <a routerLink="/register">Create one now.</a>
+      </div>
+      <button type="submit" [disabled]="!loginForm.valid">Login</button>
+    </form>
+  </div>
+</div>

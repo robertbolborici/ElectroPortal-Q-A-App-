@@ -1,0 +1,123 @@
+<div *ngIf="user" class="profile-container" [ngClass]="getProfileClass()">
+  <div class="sidebar">
+    <button (click)="setActiveTab('questions')" [ngClass]="{'active': show === 'questions'}">Questions</button>
+    <button (click)="setActiveTab('answers')" [ngClass]="{'active': show === 'answers'}">Answers</button>
+    <button (click)="setActiveTab('tags')" [ngClass]="{'active': show === 'tags'}">Tags</button>
+    <button (click)="setActiveTab('responses')" [ngClass]="{'active': show === 'responses'}">Responses</button>
+    <button (click)="setActiveTab('votes')" [ngClass]="{'active': show === 'votes'}">Votes</button>
+    <button *ngIf="isProfileOwner" (click)="setActiveTab('rewards')" [ngClass]="{'active': show === 'rewards'}">Rewards</button> <!-- New Button -->
+  </div>
+
+  <div class="profile-main">
+    <div class="top-right">
+      <button *ngIf="isProfileOwner" class="settings-button" (click)="togglePrivacySettings()" [ngClass]="{'active': showPrivacySettings}">
+        <img src="../../../assets/settings_icon.png" alt="settings icon" class="settings-icon">
+      </button>
+    </div>
+
+    <div class="info-card-container">
+      <div *ngIf="isProfileOwner || user.isFirstNameVisible || user.isLastNameVisible" class="info-card name-card">
+        <h2 class="name">
+          {{ (isProfileOwner || user.isFirstNameVisible ? user.firstName : '') + ' ' + (isProfileOwner || user.isLastNameVisible ? user.lastName : '') }}
+        </h2>
+      </div>
+      <div *ngIf="!isProfileOwner && !user.isFirstNameVisible && !user.isLastNameVisible" class="info-card name-card">
+        <h2 class="name">{{ user.userName }}</h2>
+      </div>
+    </div>
+    
+    <div *ngIf="isProfileOwner || user.isCountryVisible" class="info-card location-card">
+      <img src="../../../assets/location_icon.png" alt="location" class="location-icon">
+      <h3 class="country">{{ user.country }}</h3>
+    </div>
+    
+    <div *ngIf="isProfileOwner && showPrivacySettings">
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="user.isFirstNameVisible" (change)="updateVisibilitySetting('isFirstNameVisible', user.isFirstNameVisible)">
+        <span class="slider round"></span>
+      </label> Show First Name
+      
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="user.isLastNameVisible" (change)="updateVisibilitySetting('isLastNameVisible', user.isLastNameVisible)">
+        <span class="slider round"></span>
+      </label> Show Last Name
+      
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="user.isCountryVisible" (change)="updateVisibilitySetting('isCountryVisible', user.isCountryVisible)">
+        <span class="slider round"></span>
+      </label> Show Country    
+    </div>
+    
+    <div>
+      <div *ngIf="show === 'questions'">
+        <h2>Questions Posted:</h2>
+        <ul *ngIf="questions && questions.length > 0; else noQuestions">
+          <li *ngFor="let question of questions">
+            <a [routerLink]="['/question', question.id]">{{ question.title }}</a>
+          </li>
+        </ul>
+        <ng-template #noQuestions>
+          <p>No questions posted yet.</p>
+        </ng-template>
+      </div>
+      
+      <div *ngIf="show === 'answers'">
+        <h2>Answers Posted:</h2>
+        <ul *ngIf="answers && answers.length > 0; else noAnswers">
+          <li *ngFor="let answer of answers">
+            <a [routerLink]="['/question', answer.questionId]">{{ answer.content }}</a>
+          </li>
+        </ul>
+        <ng-template #noAnswers>
+          <p>No answers posted yet.</p>
+        </ng-template>
+      </div>
+      
+      <div *ngIf="show === 'tags'">
+        <h2>User Tags:</h2>
+        <ul *ngIf="userTags && userTags.length > 0; else noTags">
+          <li *ngFor="let tag of userTags" (click)="viewQuestionsByTag(tag.id)" class="tag-button">{{ tag.name }}</li>
+        </ul>
+        <ng-template #noTags>
+          <p>No tags available yet.</p>
+        </ng-template>
+      </div>
+      
+      <div *ngIf="show === 'responses'">
+        <h2>Responses Received:</h2>
+        <ul *ngIf="responses && responses.length > 0; else noResponses">
+          <li *ngFor="let response of responses">
+            <a [routerLink]="['/question', response.questionId]">{{ response.content }} - <strong>{{ response.userName }}</strong></a>
+          </li>
+        </ul>
+        <ng-template #noResponses>
+          <p>No responses received yet.</p>
+        </ng-template>
+      </div>
+      
+      <div *ngIf="show === 'votes'">
+        <h2>Votes Received:</h2>
+        <ul *ngIf="votes && votes.length > 0; else noVotes">
+          <li *ngFor="let vote of votes">
+            <a [routerLink]="['/question', vote.answer?.questionId]">{{ vote.answer?.content }} - {{ vote.upvote ? 'Upvoted' : 'Downvoted' }}</a>
+          </li>
+        </ul>
+        <ng-template #noVotes>
+          <p>No votes received yet.</p>
+        </ng-template>
+      </div>
+
+      <div *ngIf="isProfileOwner && show === 'rewards'">
+        <h2>Rewards Received:</h2>
+        <ul *ngIf="rewards && rewards.length > 0; else noRewards">
+          <li *ngFor="let reward of rewards">
+            <strong>{{ reward.name }}</strong>: {{ reward.description }}
+          </li>
+        </ul>
+        <ng-template #noRewards>
+          <p>No rewards received yet.</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

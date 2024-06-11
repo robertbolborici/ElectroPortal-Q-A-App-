@@ -1,0 +1,12 @@
+<div class="tags-page-container">
+  <div class="tags-header">
+    <h1>Tags</h1>
+    <p>A tag is a keyword or label that categorizes your question with other, similar questions. Using the right tags makes it easier for others to find and answer your question.</p>
+  </div>
+  <div class="tags-container">
+    <div *ngFor="let tag of tags" class="tag-item" (click)="viewQuestionsByTag(tag.id)">
+      <span>{{ tag.name }}</span>
+      <p>{{ tag.description }}</p>
+    </div>
+  </div>
+</div>

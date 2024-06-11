@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "nx serve",
+    "startTime": "2024-06-08T08:01:06.221Z",
+    "endTime": "2024-06-08T18:19:18.402Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "ElectroPortalFront:serve:development",
+      "target": "serve",
+      "projectName": "ElectroPortalFront",
+      "hash": "495593840560729162",
+      "startTime": "2024-06-08T08:01:06.234Z",
+      "endTime": "2024-06-08T18:19:18.402Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 1
+    }
+  ]
+}

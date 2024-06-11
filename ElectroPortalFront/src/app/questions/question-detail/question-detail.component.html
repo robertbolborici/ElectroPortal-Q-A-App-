@@ -1,0 +1,50 @@
+<div class="question-detail" *ngIf="question">
+  <div class="question-item">
+    <div class="header">
+
+      <h1>{{ question?.title }}</h1>
+      <div class="action-buttons">
+        <button (click)="navigateToEditQuestion(question?.id)" *ngIf="canEditOrDelete(question.userId)">Edit</button>
+        <button (click)="deleteQuestion(question?.id)" class="btn btn-danger" *ngIf="canEditOrDelete(question.userId)">Delete</button>
+      </div>
+    </div>
+
+    <p>{{ question?.content }}</p>
+    <div class="meta">
+      <span>asked by <a (click)="navigateToUserProfile(question.userId)">{{ question?.userName }}</a></span>
+      <div *ngFor="let tag of question?.questionTags" class="tag" (click)="viewQuestionsByTag(tag.id)">{{ tag?.name }}</div>
+    </div>
+
+    <div *ngFor="let answer of question?.answers" class="answer-item">
+      <div class="answer-content">
+        <p>{{ answer?.userName || 'Anonymous' }} says:</p>
+        <div *ngIf="editingAnswerId === answer.id; else displayAnswer">
+          <textarea [(ngModel)]="answer.content" class="form-control"></textarea>
+          <button (click)="saveAnswer(answer.id, answer.content)">Save</button>
+          <button (click)="cancelEdit()">Cancel</button>
+        </div>
+        <ng-template #displayAnswer>
+          <p>{{ answer?.content }}</p>
+        </ng-template>
+      </div>
+      
+      <div *ngIf="answer.isOwner" class="answer-actions">
+        <button *ngIf="editingAnswerId !== answer.id" (click)="toggleMenu(answer.id)">⋮</button>
+        <div *ngIf="showMenuForAnswer[answer.id]" class="answer-actions">
+          <div class="menu-content">
+            <button class="edit-button" *ngIf="editingAnswerId !== answer.id" (click)="editAnswer(answer.id)">Edit</button>
+            <button class="delete-button" *ngIf="editingAnswerId !== answer.id" (click)="deleteAnswer(answer.id)">Delete</button>
+          </div>
+        </div>
+      </div> 
+
+      <div class="answer-votes">
+        <button (click)="vote(answer?.id, 1)" class="upvote" [class.active]="answer?.userVote === 1">▲</button>
+        <span>{{ answer?.upVotes }}</span>
+        <button (click)="vote(answer?.id, -1)" class="downvote" [class.active]="answer?.userVote === -1">▼</button>
+        <span>{{ answer?.downVotes }}</span>
+      </div>
+    </div>
+    <app-post-answer [questionId]="question?.id" (answerPosted)="onAnswerPosted()"></app-post-answer>
+  </div>
+</div>

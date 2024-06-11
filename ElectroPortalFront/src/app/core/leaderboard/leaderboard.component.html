@@ -1,0 +1,12 @@
+<div class="leaderboard-container">
+  <h2 class="leaderboard-title">🏆 Leaderboard 🏆</h2>
+  <ul class="leaderboard-list">
+    <li *ngFor="let userScore of userScores; let i = index" [ngClass]="{'gold': i === 0, 'silver': i === 1, 'bronze': i === 2}">
+      <span *ngIf="i === 0" class="trophy">🥇</span>
+      <span *ngIf="i === 1" class="trophy">🥈</span>
+      <span *ngIf="i === 2" class="trophy">🥉</span>
+      {{userScore.userName}} - {{userScore.score}} points
+      <span *ngIf="userScore.hasReward" class="reward-notice">🎉 Rewarded</span>
+    </li>
+  </ul>
+</div>

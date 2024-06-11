@@ -1,0 +1,8 @@
+<app-nav-bar *ngIf="showUIElements"></app-nav-bar>
+<div [ngClass]="currentRouteClass" class="main-content">
+  <div *ngIf="showSidebar" class="sidebar"><app-side-bar></app-side-bar></div>
+  <div class="content-area">
+    <router-outlet></router-outlet>
+  </div>
+  <div *ngIf="showLeaderboard" class="leaderboard-container"><app-leaderboard></app-leaderboard></div>
+</div>
