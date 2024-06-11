@@ -1,0 +1,29 @@
+<div class="questions-grid-header">
+  <h1 *ngIf="!searchPerformed">All Questions</h1>
+  <h1 *ngIf="searchPerformed && questions.length > 0">Results found for "{{ searchQuery }}"</h1>
+  <h1 *ngIf="searchPerformed && questions.length === 0">No results found</h1>
+  <button (click)="navigateToPostQuestion()">Ask Question</button>
+</div>
+
+<div class="questions-grid">
+  <div *ngFor="let question of questions" class="question-item">
+    <div class="table">
+      <div class="summary">
+        <h3><a [routerLink]="['/question', question.id]">{{ question.title }}</a></h3>
+        <p>{{ question.content }}</p>
+        <div class="started">
+          <span>asked {{ question.createdAt | date:'mediumDate' }}</span>
+          <a [routerLink]="['/user-profile', question.userId]">{{ question.userName }}</a>
+        </div>
+      </div>
+      <div *ngIf="question.questionTags && question.questionTags.length > 0">
+        <span *ngFor="let tag of question.questionTags" class="tag" (click)="viewQuestionsByTag(tag.id)">{{ tag.name }}</span>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button *ngIf="canEditOrDelete(question.userId)" (click)="navigateToEditQuestion(question.id)">Edit</button>
+      <button *ngIf="canEditOrDelete(question.userId)" (click)="deleteQuestion(question.id)" class="btn btn-danger">Delete</button>
+    </div>
+  </div>
+</div>

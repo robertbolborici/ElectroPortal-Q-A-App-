@@ -1,0 +1,33 @@
+<div class="documentation">
+  <button *ngIf="isAdmin" class="add-button" (click)="selectDocumentation({id: 0, name: '', url: ''})">Add New</button>
+  <ul>
+    <li *ngFor="let doc of documentations">
+      <div class="doc-info">
+        {{ doc.name }} - <a [href]="doc.url" target="_blank">{{ doc.url }}</a>
+      </div>
+      <div *ngIf="isAdmin" class="menu-container">
+        <button class="three-dots-button" (click)="toggleMenu(doc.id)">⋮</button>
+        <div class="menu" *ngIf="showMenuForDocumentation[doc.id]">
+          <button (click)="selectDocumentation(doc)">Edit</button>
+          <button (click)="deleteDocumentation(doc)">Delete</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <div *ngIf="selectedDocumentation">
+    <h2>{{ selectedDocumentation.id ? 'Edit' : 'Add New' }} Documentation</h2>
+    <form (ngSubmit)="saveDocumentation(selectedDocumentation)">
+      <label for="name">Name:</label>
+      <input type="text" id="name" [(ngModel)]="selectedDocumentation.name" name="name" required>
+
+      <label for="url">URL:</label>
+      <input type="url" id="url" [(ngModel)]="selectedDocumentation.url" name="url" required>
+
+      <div class="form-buttons">
+        <button type="submit">Save</button>
+        <button type="button" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

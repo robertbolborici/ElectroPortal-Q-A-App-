@@ -1,0 +1,12 @@
+<form [formGroup]="answerForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <input type="text" formControlName="content" id="answerContent" placeholder="Write your answer here...">
+    <button type="submit">Submit</button>
+    <div *ngIf="answerForm.get('content')?.touched && answerForm.get('content')?.errors?.['required']" class="text-danger">
+      Answer is required.
+    </div>
+    <div *ngIf="answerForm.get('content')?.errors?.['minlength']" class="text-danger">
+      Answer must be at least 5 characters long.
+    </div>
+  </div>
+</form>

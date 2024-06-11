@@ -1,0 +1,26 @@
+Daemon process terminated and closed the connection
+
+Messages from the log:
+
+[Error: multiple: [Read { file: "d:\\Licenta\\ElectroPortalFront\\.gitignore", err: Error { kind: InvalidData, message: "stream did not contain valid UTF-8" } }]] {
+  code: 'GenericFailure'
+}
+
+Node.js v20.9.0
+[NX Daemon Server] - 2024-06-09T11:43:10.899Z - Started listening on: \\.\pipe\nx\C:\Users\robib\AppData\Local\Temp\73f66f464337d2507374\d.sock
+[NX Daemon Server] - 2024-06-09T11:43:10.901Z - [WATCHER]: Subscribed to changes within: d:\Licenta\ElectroPortalFront (native)
+[NX Daemon Server] - 2024-06-09T11:43:10.905Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-06-09T11:43:10.907Z - Closed a connection. Number of open connections: 0
+node:internal/process/promises:289
+            triggerUncaughtException(err, true /* fromPromise */);
+            ^
+
+[Error: multiple: [Read { file: "d:\\Licenta\\ElectroPortalFront\\.gitignore", err: Error { kind: InvalidData, message: "stream did not contain valid UTF-8" } }]] {
+  code: 'GenericFailure'
+}
+
+Node.js v20.9.0
+
+
+
+More information: d:\Licenta\ElectroPortalFront\.nx\cache\d\daemon.log

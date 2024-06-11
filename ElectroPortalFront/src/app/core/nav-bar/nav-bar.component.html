@@ -1,0 +1,21 @@
+<header class="nav-header">
+  <a href="/home" class="logo">
+    <img src="../../assets/logo.png" alt="Logo">ElectroPortal
+  </a>
+
+  <nav class="nav-links">
+    <button class="about-btn" (click)="goToAbout()">About</button>
+    <button class="did-you-know-btn" (click)="goToDidYouKnow()">Did you know?</button>
+  </nav>
+
+  <div class="search-bar-container">
+    <input type="text" placeholder="Search..." [(ngModel)]="searchQuery" (keyup.enter)="search()">
+  </div>  
+
+  <div class="user-controls">
+    <button *ngIf="!isLoggedIn" (click)="goToLogin()" class="login-btn">Login</button>
+    <button *ngIf="!isLoggedIn" (click)="goToRegister()" class="register-btn">Register</button>
+    <button *ngIf="isLoggedIn" (click)="goToUserProfile()">Profile</button>
+    <button *ngIf="isLoggedIn" (click)="logout()" class="logout-btn">Logout</button>
+  </div>
+</header>

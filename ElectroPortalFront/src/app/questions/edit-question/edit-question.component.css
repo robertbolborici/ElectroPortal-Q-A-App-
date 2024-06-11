@@ -1,0 +1,121 @@
+.edit-question-form {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin-top: 40px;
+  background: #f4f4f4;
+  z-index: 1;
+}
+
+.edit-question-form form {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: 80vh;
+  margin: 5vh auto;
+  padding: 2vw;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; 
+  z-index: 2;
+}
+
+.edit-question-form .form-group {
+  margin-bottom: 2vh;
+}
+
+.edit-question-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.6vh;
+}
+
+.edit-question-form input[type="text"],
+.edit-question-form textarea,
+.edit-question-form select {
+  width: 100%;
+  padding: 1.5vh 1vw;
+  margin-bottom: 2vh;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  box-sizing: border-box;
+}
+
+.edit-question-form textarea {
+  resize: vertical;
+  max-width: 100%;
+  min-height: 10vh;
+  max-height: 25vh;
+}
+
+.edit-question-form .error {
+  color: #dc3545;
+  font-size: 1rem;
+  margin-top: -1vh;
+  margin-bottom: 2vh;
+}
+
+.edit-question-form .tag-button {
+  display: inline-block;
+  margin: 0 5px 5px 0;
+  padding: 5px 10px;
+  border: 1px solid #cccccc;
+  border-radius: 15px;
+  background-color: #f4f4f4;
+  cursor: pointer;
+  user-select: none;
+}
+
+.edit-question-form .tag-button.selected {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.edit-question-form button[type="submit"] {
+  width: 100%; 
+  padding: 1.5vh 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.edit-question-form button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.edit-question-form button[type="submit"]:disabled {
+  background-color: #cccccc;
+}
+
+@media (max-width: 768px) {
+  .edit-question-form form {
+    width: 95%;
+    padding: 5%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .edit-question-form form {
+    width: 90%;
+  }
+}
+
+@media (min-width: 1025px) {
+  .edit-question-form form {
+    width: 70%;
+  }
+
+  .edit-question-form textarea {
+    max-height: 25vh;
+  }
+}
